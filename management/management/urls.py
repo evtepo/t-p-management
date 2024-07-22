@@ -6,5 +6,4 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("authorization.urls")),
-]
-urlpatterns += debug_toolbar_urls()
+] + debug_toolbar_urls()
