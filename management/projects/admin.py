@@ -20,26 +20,25 @@ class TaskAdmin(AdminSettingsMixin):
         "name",
         "condition",
         "author",
-        "contributor",
+        "contributor_view",
         "project",
         "created_at",
         "updated_at",
     )
     list_filter = ("condition", "contributor", "project")
-
-    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
-        return super().get_queryset(request).select_related("author", "contributor", "project")
+    list_select_related = ("author", "contributor", "project")
 
 
 @admin.register(Project)
 class ProjectAdmin(AdminSettingsMixin):
     list_display = ("name", "author", "contributors", "created_at", "updated_at")
     list_filter = ("author",)
+    list_select_related = ("author",)
 
     def contributors(self, obj):
         return ", ".join(contributor.username for contributor in obj.contributor.all())
     
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
-        return super().get_queryset(request).select_related("author").prefetch_related("contributor")
+        return super().get_queryset(request).prefetch_related("contributor")
 
     contributors.short_description = "Contributors"
