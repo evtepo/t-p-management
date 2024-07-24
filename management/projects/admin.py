@@ -27,6 +27,10 @@ class TaskAdmin(AdminSettingsMixin):
     )
     list_filter = ("condition", "contributor", "project")
     list_select_related = ("author", "contributor", "project")
+    
+    @admin.display(empty_value="Not selected", description="Contributor of task")
+    def contributor_view(self, obj):
+        return obj.contributor
 
 
 @admin.register(Project)
