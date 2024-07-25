@@ -1,13 +1,10 @@
 import os
 
 from pathlib import Path
-from dotenv import load_dotenv
 from split_settings.tools import include
 
 from management.config import settings
 
-
-load_dotenv()
 
 include(
     "components/*.py",
