@@ -4,7 +4,7 @@ SECRET_KEY = settings.secret_key
 
 DEBUG = settings.debug
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = settings.allowed_hosts.split(",")
 
 ROOT_URLCONF = "management.urls"
 
@@ -34,3 +34,7 @@ INTERNAL_IPS = [
 SESSION_COOKIE_HTTPONLY = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = settings.session_cookie_time * 24 * 60 * 60
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/home/"
+LOGOUT_REDIRECT_URL = "/home/"
