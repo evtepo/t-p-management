@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Home - My Django App
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'projects/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Welcome to My Django App!</h2>
+    <p>This is the home page of the application. Here you can find information about the features and updates.</p>
+
+    <section>
+        <h3>Features</h3>
+        <ul>
+            <li>Feature 1: Description of feature 1.</li>
+            <li>Feature 2: Description of feature 2.</li>
+            <li>Feature 3: Description of feature 3.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Latest Updates</h3>
+        <p>Stay tuned for the latest updates and news about our application.</p>
+    </section>
+{% endblock %}
