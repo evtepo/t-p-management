@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.urls import reverse
 
 
 class BaseMixin(models.Model):
@@ -29,6 +30,9 @@ class Project(BaseMixin):
         related_name="contributor_project",
         verbose_name="Contributors of the project",
     )
+
+    def get_absolute_url(self):
+        return reverse("project-detail", kwargs={"pk": self.pk})
 
 
 class Task(BaseMixin):
@@ -65,3 +69,6 @@ class Task(BaseMixin):
         related_name="project_task",
         verbose_name="Task of project",
     )
+
+    def get_absolute_url(self):
+        return reverse("task-detail", kwargs={"pk": self.pk})
