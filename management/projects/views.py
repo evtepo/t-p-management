@@ -23,7 +23,7 @@ class ProjectsView(ListView):
         )
 
         return projects
-    
+
 
 class ProjectCreate(CreateView):
     model = Project
@@ -33,12 +33,25 @@ class ProjectCreate(CreateView):
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         if not (project_name := request.POST["name"]):
             return HttpResponseBadRequest("Projcet name cannot be empty.")
-        
+
         project = Project(name=project_name, author=request.user)
         project.save()
 
-        return HttpResponseRedirect(reverse("project-detail", kwargs={"pk": project.pk}))
+        return HttpResponseRedirect(
+            reverse("project-detail",
+            kwargs={"pk": project.pk}),
+        )
 
 
 class ProjectDetail(DetailView):
-    ...
+    context_object_name = "project"
+    template_name = "detail_project.html"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        project_id = self.kwargs.get("pk")
+        project = (
+            Project.objects.filter(id=project_id)
+            .select_related("author")
+            .prefetch_related("contributor")
+        )
+        return project
