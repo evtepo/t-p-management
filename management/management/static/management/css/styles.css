@@ -109,3 +109,36 @@ p {
     list-style: disc;
     padding-left: 20px;
 }
+
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.project {
+    background: #fff;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1 0 21%;
+    max-width: 21%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.project h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.project p {
+    margin: 5px 0;
+}
+
+.project .contributors {
+    font-size: 0.9rem;
+    color: #555;
+}
