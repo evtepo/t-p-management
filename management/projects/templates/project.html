@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'management/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>Project List</h2>
+    <div class="project-list">
+        {% for project in projects %}
+            <div class="project">
+                <h3><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></h3>
+                <p><strong>Author:</strong> {{ project.author.username }}</p>
+                <p class="contributors"><strong>Contributors:</strong> 
+                    {% for contributor in project.contributor.all %}
+                        {{ contributor.username }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
